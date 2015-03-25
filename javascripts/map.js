@@ -18,7 +18,7 @@ var map = new Datamap({
     element: document.getElementById('map'),
     fills: colors,
     dataType: 'json',
-    dataUrl: '/Dataviz/data/countries.json',
+    dataUrl: '/travelviz/data/countries.json',
     data: {}
 });
 
@@ -34,7 +34,7 @@ var svg = placesDiv.append("svg")
     .attr("height", height);
 var defs = svg.append("defs");
 
-d3.json("/Dataviz/data/places.json", function(error, latest_data) {
+d3.json("/travelviz/data/places.json", function(error, latest_data) {
     if (error) {
         console.log(error);
     } else {
@@ -249,7 +249,7 @@ var force = d3.layout.force()
     .charge(-100)
     .size([w, h]);
 
-d3.json("/Dataviz/data/flights.json", function(error, json) {
+d3.json("/travelviz/data/flights.json", function(error, json) {
     if (error) {
         console.log(error);
     } else {
