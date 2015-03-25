@@ -421,5 +421,77 @@ Small Device Styles
     max-width: 480px;
     font-size: 11px;
   }
+}
 
+.container .text-muted {
+    margin: 20px 0;
+}
+
+.container {
+    width: 1190px;
+}
+
+.map-container {
+    position: relative;
+    width: 100%;
+    height: 600px;
+}
+
+.images-container {
+    width: 100%;
+    height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 20px;
+}
+
+.images {
+    width: 100%;
+}
+
+.tooltip-caption {
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.tooltip-body {
+
+}
+
+.tooltip-container {
+    width: 200px;
+}
+
+.hexagon {
+    fill: white;
+    pointer-events: all;
+}
+
+.hexagon path {
+    -webkit-transition: fill 250ms linear;
+    transition: fill 250ms linear;
+}
+
+.hexagon :hover {
+    /*fill: pink;*/
+    stroke-width: 3px;
+}
+
+.hexagon .fill {
+    fill: red;
+}
+
+.mesh {
+    fill: none;
+    stroke: #000;
+    stroke-opacity: .2;
+    pointer-events: none;
+}
+
+.border {
+    fill: none;
+    stroke: #000;
+    stroke-width: 2px;
+    pointer-events: none;
 }
