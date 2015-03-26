@@ -347,6 +347,9 @@ var bubbles = d3.select(".bubble").append("svg")
     .attr("width", w)
     .attr("height", h);
 
+
+buildVisaInfoLegend(".bubble", 20, 30);
+
 var force = d3.layout.force()
     .gravity(.05)
     .distance(100)
@@ -378,6 +381,17 @@ d3.json("/travelviz/data/flights.json", function(error, json) {
             .attr("class", "node")
             .call(force.drag);
 
+        var tip = d3.tip()
+            .attr('class', 'd3-tip')
+            .offset([-10, 0])
+            .html(function(d) {
+                return "<strong>Country:</strong> <span style='color:red'>" + d.name + "</span>" +
+                    "<br/><strong>Price</strong> " + d.value + "$" +
+                    "<br/><strong>Flight duration</strong> " + Math.round(d.duration/60) + "h";
+            })
+
+        node.call(tip);
+
         node.append("circle")
             .attr("fill", function(d) {
                 return colors[d.visa];
@@ -385,10 +399,22 @@ d3.json("/travelviz/data/flights.json", function(error, json) {
             .attr("x", -8)
             .attr("y", -8)
             .attr("r", function(d) {
-                return (!d.value)?5:10+Math.log(d.value);
+                var value = d.value;
+                if(!value) value = 2;
+                else if( value < 50) value = 7;
+                else if (value < 100) value = 10;
+                else if (value < 500) value = 20;
+                else if (value < 1000) value = 25;
+                else value = 30;
+                return value;
             })
             .attr("width", 16)
-            .attr("height", 16);
+            .attr("height", 16)
+            .attr("stroke", "black")
+            .attr("stroke-width", "1px")
+            .on('mouseover', tip.show)
+            .on('mouseout', tip.hide);
+
         node.append("text")
             .attr("dx", 12)
             .attr("dy", ".35em")
