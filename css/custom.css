@@ -68,7 +68,7 @@ body {
     transition: fill 250ms linear;
 }
 
-.hexagon :hover {
+.hexagon:hover {
     /*fill: pink;*/
     stroke-width: 3px;
 }

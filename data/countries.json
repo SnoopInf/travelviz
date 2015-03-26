@@ -201,5 +201,6 @@
 "ZMB": {"fillKey":"Visa on arrival","anotherProperty":""},
 "ZWE": {"fillKey":"eVisa","anotherProperty":""},
   "ESH": {"fillKey":"Visa required","anotherProperty":"Miles of desert and nothing more"},
-  "SLB": {"fillKey":"Visa required","anotherProperty":""}
+  "SLB": {"fillKey":"Visa required","anotherProperty":""},
+  "PYF": {"fillKey":"Visa required","anotherProperty":"It's actually france"}
 }

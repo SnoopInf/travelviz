@@ -10,8 +10,37 @@ var colors = {
     "Electronic Travel Authorization": '#F3E292',
     "Entry Permit on arrival": '#ACE5A1',
     "Ukraine": '#AC85C8',
-    "Nature": 'green'
+    "Nature": 'green',
+    "Architecture": 'purple',
+    "History": 'brown'
 };
+
+var colorsVisa = [
+    {'name': "Visa required",
+        'color': '#F08080'},
+    {'name': "Visa not required",
+        'color': '#32CD32'},
+    {'name': "Visa on arrival",
+        'color': '#FFE590'},
+    {'name': "eVisa",
+        'color': '#E8C2CF'},
+    {'name': "Tourist card required",
+        'color': '#FBCE7B'},
+    {'name': "Electronic Travel Authorization",
+        'color': '#F3E292'},
+    {'name': "Entry Permit on arrival",
+        'color': '#ACE5A1'},
+    {'name': "Ukraine",
+        'color': '#AC85C8'}
+];
+
+var colorsPlaces = [
+    {'name': "Nature",
+        'color': 'green'},
+    {'name': "Architecture",
+        'color': 'purple'},
+    {'name': "History",
+        'color': 'brown'}];
 
 
 var map = new Datamap({
@@ -19,7 +48,12 @@ var map = new Datamap({
     fills: colors,
     dataType: 'json',
     dataUrl: '/travelviz/data/countries.json',
-    data: {}
+    data: {},
+    geographyConfig: {
+        popupTemplate: function(geography, data) {
+            return '<div class="hoverinfo"><strong>' + geography.properties.name + '</strong> <br />Visa info: ' +  data.fillKey +  ((data.anotherProperty)?' ('+ data.anotherProperty + ')': '') + ' </div>';
+        }
+    }
 });
 
 
@@ -33,6 +67,76 @@ var svg = placesDiv.append("svg")
     .attr("width", width)
     .attr("height", height);
 var defs = svg.append("defs");
+function buildVisaInfoLegend(container, x, y) {
+    var legend = d3.select(container)
+        .select("svg")
+        .append("g")
+        .attr("class", "legend");
+
+
+    legend.selectAll("circle.legend-bullet")
+        .data(colorsVisa)
+        .enter()
+        .append('rect')
+        .attr('class', 'legend-bullet')
+        .attr('x', x)
+        .attr('y', function (data, index) {
+            return y + index * 15;
+        })
+        .attr("width", 10).attr("height", 10)
+        .attr("fill", function (data) {
+            return data.color;
+        })
+        .attr("stroke", "black");
+
+    legend.selectAll("text.legend-text")
+        .data(colorsVisa)
+        .enter()
+        .append('text')
+        .attr('class', 'legend-text')
+        .attr('x', x + 20)
+        .attr('y', function (data, index) {
+            return y + 10 + index * 15;
+        })
+        .text(function (d) {
+            return d.name
+        });
+}
+
+buildVisaInfoLegend(".map-container", 20, 455);
+
+var legendPlaces = d3.select(".map-container")
+    .select("svg")
+    .append("g")
+    .attr("class", "legend-places");
+
+
+legendPlaces.selectAll("circle.legend-bullet")
+    .data(colorsPlaces)
+    .enter()
+    .append('circle')
+    .attr('class', 'legend-bullet')
+    .attr('cx', '600')
+    .attr('cy', function(data, index) {
+        return 505 + index * 22;
+    })
+    .attr('r', 10)
+    .attr("width", 10).attr("height", 10)
+    .attr("fill", function(data){
+        return data.color;})
+    .attr("stroke","white")
+    .attr("stroke-width","2px");
+
+legendPlaces.selectAll("text.legend-text")
+    .data(colorsPlaces)
+    .enter()
+    .append('text')
+    .attr('class', 'legend-text')
+    .attr('x', '615')
+    .attr('y', function(data, index) {
+        return 510 + index * 22;
+    })
+    .text(function(d) { return d.name });
 
 d3.json("/travelviz/data/places.json", function(error, latest_data) {
     if (error) {
@@ -249,7 +353,7 @@ var force = d3.layout.force()
     .charge(-100)
     .size([w, h]);
 
-d3.json("/travelviz/data/flights.json", function(error, json) {
+d3.json("/Dataviz/data/flights.json", function(error, json) {
     if (error) {
         console.log(error);
     } else {
