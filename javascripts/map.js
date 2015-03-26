@@ -353,7 +353,7 @@ var force = d3.layout.force()
     .charge(-100)
     .size([w, h]);
 
-d3.json("/Dataviz/data/flights.json", function(error, json) {
+d3.json("/travelviz/data/flights.json", function(error, json) {
     if (error) {
         console.log(error);
     } else {
