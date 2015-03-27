@@ -53,7 +53,7 @@
   {"name":"Russia","value":39,"visa":"Visa not required","duration":228.2631579},
   {"name":"Romania","value":186,"visa":"Visa required","duration":69},
   {"name":"Qatar","value":318,"visa":"Visa required","duration":257},
-  {"name":"French Polynesia","value":5391,"visa":"","duration":1248.666667},
+  {"name":"French Polynesia","value":5391,"visa":"Visa required","duration":1248.666667},
   {"name":"Faroe Islands","value":1400,"visa":"Visa required","duration":199},
   {"name":"Paraguay","value":null,"visa":"Visa not required","duration":927},
   {"name":"Portugal","value":148,"visa":"Visa required","duration":299.5},
